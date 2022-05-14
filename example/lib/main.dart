@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:app_view/app_view.dart';
+
 void main() {
   Map<String, dynamic> app = {
     "@type": "materialApp",
@@ -38,4 +39,7 @@ void main() {
     ]
   };
   runApp(AppView(app));
+  Column(
+    children: [],
+  );
 }

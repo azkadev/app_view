@@ -2,7 +2,11 @@
  
 Library Eksperiment membuat applikasi flutter dengan mudah data json.
 
-- Quickstart
+## List Menu
+  - [Docs]()
+  - [Quickstart]()
+
+#### Quickstart
 ![](https://github.com/azkadev/app_view/blob/main/screenshots/screenshot.png?raw=true)
 
 <details open>
@@ -52,3 +56,41 @@ void main() {
 ``` 
 
 </details>
+
+## Docs
+| key         | value      | Deskripsi | `required` |
+| ----------- |:----------:|:----------|:----------:|
+| `@type` | [widget]() |  | `yes` |
+| `root` | object in array [metod]() | | `no` |
+
+### Widget
+
+#### Scaffold
+| key         | value      | Deskripsi | `required` |
+| ----------- |:----------:|:----------|:----------:|
+| `@type` | `scaffold` |  | `yes` |
+| `body` | [Widget]() | | `yes` |
+
+#### Container
+| key         | value      | Deskripsi | `required` |
+| ----------- |:----------:|:----------|:----------:|
+| `@type` | `container` |  | `yes` |
+| `child` | [Widget]() | | `yes` |
+
+#### Text
+| key         | value      | Deskripsi | `required` |
+| ----------- |:----------:|:----------|:----------:|
+| `@type` | `text` |  | `yes` |
+| `text` | string | | `yes` |
+
+#### Column
+| key         | value      | Deskripsi | `required` |
+| ----------- |:----------:|:----------|:----------:|
+| `@type` | `container` |  | `yes` |
+| `children` | List array of [Widget]() | | `yes` |
+
+#### Row
+| key         | value      | Deskripsi | `required` |
+| ----------- |:----------:|:----------|:----------:|
+| `@type` | `container` |  | `yes` |
+| `children` | List array of [Widget]() | | `yes` |
