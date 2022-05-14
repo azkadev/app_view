@@ -39,7 +39,5 @@ void main() {
     ]
   };
   runApp(AppView(app));
-  Column(
-    children: [],
-  );
+  
 }

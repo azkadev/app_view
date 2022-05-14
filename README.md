@@ -3,10 +3,10 @@
 Library Eksperiment membuat applikasi flutter dengan mudah data json.
 
 ## List Menu
-  - [Docs]()
-  - [Quickstart]()
+  - [Docs](#docs)
+  - [Quickstart](#quickstart)
 
-#### Quickstart
+## Quickstart
 ![](https://github.com/azkadev/app_view/blob/main/screenshots/screenshot.png?raw=true)
 
 <details open>
@@ -58,12 +58,34 @@ void main() {
 </details>
 
 ## Docs
+Basic membuat widget / applikasi adalah sebagai berikut
 | key         | value      | Deskripsi | `required` |
 | ----------- |:----------:|:----------|:----------:|
 | `@type` | [widget](#widget) |  | `yes` |
 | `root` | object di dalam array [metod]() | | `no` |
 
-### Widget
+Contoh
+```json
+{
+    "@type": "materialApp",
+    // isi key home karena  widget original ini membutuhkan hom
+    "home": { 
+        // isi key @type lalu isi value sesuai nama widget yang ingin anda buat
+        "@type": "scaffold",
+        // isi juga parameters key yang di perlukan
+        "body": {
+            // isi widget seperti ini dan sesuaikan parameters yang di perlukan
+            "@type": "Center",
+            "child": {
+                "@type": "text",
+                "text": "Hello world"
+            }
+        }
+    }
+}
+```
+
+## Widget
 
 #### Scaffold
 | key         | value      | Deskripsi | `required` |
