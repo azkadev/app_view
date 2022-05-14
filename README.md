@@ -1,59 +1,54 @@
 # app_view
+ 
+Eksperiment membuat applikasi flutter dengan mudah data json.
 
-A new Flutter project.
+- Quickstart
+![](https://github.com/azkadev/app_view/blob/main/screenshots/screenshot.png?raw=true)
 
-- example
+<details open>
+<summary>Code</summary>
 
-![]()
 ```dart
-{
+// ignore_for_file: depend_on_referenced_packages
+import 'package:flutter/material.dart';
+import 'package:app_view/app_view.dart';
+void main() {
+  Map<String, dynamic> app = {
     "@type": "materialApp",
     "home": {
-        "@type": "Scaffold",
-        "body": {
-            "@type": "Center",
-            "child": {
-                "@type": "Text",
-                "text": "Hello count ${variable[\"count\"][\"data\"]}",
-                "style": {
-                    "@type": "TextStyle",
-                    "fontSize": 15
-                }
-            }
-        },
-        "floating_action_button": {
-            "@type": "FloatingActionButton",
-            "tooltip": "Increment",
-            "child": {
-                "@type": "icon",
-                "icon": "add",
-                "onpresed": [
-                    {
-                        "@type": "updatevariable",
-                        "var": {
-                            "@type": "state",
-                            "count": "increase"
-                        }
-                    }
-                ]
-            }
+      "@type": "Scaffold",
+      "body": {
+        "@type": "Center",
+        "child": {
+          "@type": "Text",
+          "text": "Hello world \${variable[\"count\"][\"data\"]}",
+          "style": {"@type": "TextStyle", "fontSize": 15}
         }
+      },
+      "floating_action_button": {
+        "@type": "FloatingActionButton",
+        "tooltip": "Increment",
+        "child": {
+          "@type": "icon",
+          "icon": "add",
+          "onpresed": [
+            {
+              "@type": "updatevariable",
+              "var": {"@type": "state", "count": "increase"}
+            }
+          ]
+        }
+      }
     },
     "root": [
-        {
-            "@type": "variable",
-            "var": {
-                "@type": "state",
-                "count": 0
-            }
-        },
-        {
-            "@type": "variable",
-            "var": {
-                "@type": "database",
-                "count_login_app": 0
-            }
-        }
+      {
+        "@type": "variable",
+        "var": {"@type": "state", "count": 0}
+      }
     ]
+  };
+  runApp(AppView(app));
 }
-```
+``` 
+
+</details>
