@@ -60,8 +60,8 @@ void main() {
 ## Docs
 | key         | value      | Deskripsi | `required` |
 | ----------- |:----------:|:----------|:----------:|
-| `@type` | [widget]() |  | `yes` |
-| `root` | object in array [metod]() | | `no` |
+| `@type` | [widget](#widget) |  | `yes` |
+| `root` | object di dalam array [metod]() | | `no` |
 
 ### Widget
 
@@ -69,13 +69,13 @@ void main() {
 | key         | value      | Deskripsi | `required` |
 | ----------- |:----------:|:----------|:----------:|
 | `@type` | `scaffold` |  | `yes` |
-| `body` | [Widget]() | | `yes` |
+| `body` | [Widget](#widget) | | `yes` |
 
 #### Container
 | key         | value      | Deskripsi | `required` |
 | ----------- |:----------:|:----------|:----------:|
 | `@type` | `container` |  | `yes` |
-| `child` | [Widget]() | | `yes` |
+| `child` | [Widget](#widget) | | `yes` |
 
 #### Text
 | key         | value      | Deskripsi | `required` |
@@ -86,11 +86,11 @@ void main() {
 #### Column
 | key         | value      | Deskripsi | `required` |
 | ----------- |:----------:|:----------|:----------:|
-| `@type` | `container` |  | `yes` |
-| `children` | List array of [Widget]() | | `yes` |
+| `@type` | must be `Column` |  | `yes` |
+| `children` | List array of [Widget](#widget) | | `yes` |
 
 #### Row
 | key         | value      | Deskripsi | `required` |
 | ----------- |:----------:|:----------|:----------:|
-| `@type` | `container` |  | `yes` |
-| `children` | List array of [Widget]() | | `yes` |
+| `@type` | `Row` |  | `yes` |
+| `children` | List array of [Widget](#widget) | | `yes` |
