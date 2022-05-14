@@ -1,6 +1,6 @@
 # app_view
  
-Eksperiment membuat applikasi flutter dengan mudah data json.
+Library Eksperiment membuat applikasi flutter dengan mudah data json.
 
 - Quickstart
 ![](https://github.com/azkadev/app_view/blob/main/screenshots/screenshot.png?raw=true)
