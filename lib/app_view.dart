@@ -24,8 +24,6 @@ Widget jsonToWidget(dynamic data) {
   if (data is Map) {
     if (data["@type"] is String) {
       String type = data["@type"];
-      if (RegExp(r"^(helloWorld)$", caseSensitive: false).hasMatch(type)) {}
-
       if (RegExp(r"^(MaterialApp)$", caseSensitive: false).hasMatch(type)) {
         return MaterialApp(
           home: jsonToWidget(data["home"]),
@@ -40,6 +38,10 @@ Widget jsonToWidget(dynamic data) {
       }
       if (RegExp(r"^(Container)$", caseSensitive: false).hasMatch(type)) {
         return Container(
+          alignment: jsonToAlignmentGeometry(data["alignment"]),
+          padding: jsonToEdgeInsetsGeometry(data["padding"]),
+          height: jsonToDouble(data["height"]),
+          width: jsonToDouble(data["width"]),
           child: jsonToWidget(data["child"]),
         );
       }
@@ -58,7 +60,7 @@ Widget jsonToWidget(dynamic data) {
 
       if (RegExp(r"^(Padding)$", caseSensitive: false).hasMatch(type)) {
         return Padding(
-          padding: jsonToEdgeInsetsGeometry(data["padding"]),
+          padding: jsonToEdgeInsetsGeometry(data["padding"]) ?? const EdgeInsets.all(0),
           child: jsonToWidget(data["child"]),
         );
       }
@@ -93,48 +95,65 @@ Widget jsonToWidget(dynamic data) {
 }
 
 /// json to EdgeInsetGeometry
-EdgeInsetsGeometry jsonToEdgeInsetsGeometry(Map? data) {
-  data ??= {};
-  if (data["@type"] is String) {
-    String type = data["@type"];
-    late double value = 0;
-    if (data["value"] is num) {
-      value = (data["value"] as num).toDouble();
-    }
-    late double vertical = 0;
-    if (data["vertical"] is num) {
-      vertical = (data["vertical"] as num).toDouble();
-    }
-    late double horizontal = 0;
-    if (data["horizontal"] is num) {
-      horizontal = (data["horizontal"] as num).toDouble();
-    }
-    late double top = 0;
-    if (data["top"] is num) {
-      top = (data["top"] as num).toDouble();
-    }
-    late double left = 0;
-    if (data["left"] is num) {
-      left = (data["left"] as num).toDouble();
-    }
-    late double right = 0;
-    if (data["right"] is num) {
-      right = (data["right"] as num).toDouble();
-    }
-    late double bottom = 0;
-    if (data["bottom"] is num) {
-      bottom = (data["bottom"] as num).toDouble();
-    }
-
-    if (RegExp(r"^(EdgeInsets.all)$", caseSensitive: false).hasMatch(type)) {
-      return EdgeInsets.all(value);
-    }
-    if (RegExp(r"^(EdgeInsets.symmetric)$", caseSensitive: false).hasMatch(type)) {
-      return EdgeInsets.symmetric(vertical: vertical, horizontal: horizontal);
-    }
-    if (RegExp(r"^(EdgeInsets.only)$", caseSensitive: false).hasMatch(type)) {
-      return EdgeInsets.only(top: top, left: left, right: right, bottom: bottom);
+EdgeInsetsGeometry? jsonToEdgeInsetsGeometry(dynamic data) {
+  if (data is EdgeInsetsGeometry) {
+    return data;
+  }
+  if (data is Map) {
+    if (data["@type"] is String) {
+      String type = data["@type"];
+      if (RegExp(r"^(EdgeInsets.all)$", caseSensitive: false).hasMatch(type)) {
+        return EdgeInsets.all(jsonToDouble(data["value"]) ?? 0.0);
+      }
+      if (RegExp(r"^(EdgeInsets.symmetric)$", caseSensitive: false).hasMatch(type)) {
+        return EdgeInsets.symmetric(vertical: jsonToDouble(data["vertical"]) ?? 0.0, horizontal: jsonToDouble(data["horizontal"]) ?? 0.0);
+      }
+      if (RegExp(r"^(EdgeInsets.only)$", caseSensitive: false).hasMatch(type)) {
+        return EdgeInsets.only(
+          top: jsonToDouble(data["top"]) ?? 0.0,
+          left: jsonToDouble(data["left"]) ?? 0.0,
+          right: jsonToDouble(data["right"]) ?? 0.0,
+          bottom: jsonToDouble(data["bottom"]) ?? 0.0,
+        );
+      }
     }
   }
   return const EdgeInsets.all(0);
+}
+
+/// json to EdgeInsetGeometry
+AlignmentGeometry? jsonToAlignmentGeometry(dynamic data) {
+  if (data is AlignmentGeometry) {
+    return data;
+  }
+  if (data is Map) {
+    if (data["@type"] is String) {
+      String type = data["@type"];
+    }
+  }
+  return null;
+}
+
+double? jsonToDouble(dynamic value) {
+  if (value is String) {
+    if (RegExp(r"[0-9]+", caseSensitive: false).hasMatch(value)) {
+      return int.parse(RegExp(r"[0-9]+", caseSensitive: false).stringMatch(value) ?? "0").toDouble();
+    }
+  }
+  if (value is num) {
+    return value.toDouble();
+  }
+  return null;
+}
+
+int? jsonToInt(dynamic value) {
+  if (value is String) {
+    if (RegExp(r"[0-9]+", caseSensitive: false).hasMatch(value)) {
+      return int.parse(RegExp(r"[0-9]+", caseSensitive: false).stringMatch(value) ?? "0");
+    }
+  }
+  if (value is num) {
+    return value.toInt();
+  }
+  return null;
 }

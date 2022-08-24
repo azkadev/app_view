@@ -74,10 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   "children": List.generate(5, (index) {
                     return {
                       "@type": "Padding",
-                      "padding": {
-                        "@type": "EdgeInsets.all",
-                        "value": 10,
-                      },
+                      "padding": EdgeInsets.all(10),
                       "child": {
                         "@type": "Text",
                         "data": "Row Text $index",
@@ -95,10 +92,6 @@ class _MyHomePageState extends State<MyHomePage> {
           "tooltip": 'Increment',
           "child": Icon(Icons.abc),
         }
-        // "floatingActionButton": FloatingActionButton(
-        //   onPressed: () {},
-        //   child: Icon(Icons.abc),
-        // )
       }
     });
   }
