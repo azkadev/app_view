@@ -27,6 +27,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    task();
   }
 
   task() {
@@ -39,8 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    SingleChildScrollView();
-    return jsonToWidget({
+    return AppView({
       "@type": "MaterialApp",
       "debugShowCheckedModeBanner": true,
       "home": {
@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
           "children": [
             {
               "@type": "Padding",
-              "padding": {
+              "padding": const {
                 "@type": "EdgeInsets.all",
                 "value": 10,
               },
@@ -104,13 +104,15 @@ class _MyHomePageState extends State<MyHomePage> {
             },
           ]
         },
-        "floatingActionButton": {
+        "floatingActionButton": const {
           "@type": "floatingActionButton",
-          "onPressed": {"@type": "SendCallbackData", "data": "ini tayo"},
+          "onPressed":  {"@type": "SendCallbackData", "data": "ini tayo"},
           "tooltip": 'Increment',
           "child": Icon(Icons.abc),
         }
       }
+    }, callback: (value) {
+      print(value);
     });
   }
 }
