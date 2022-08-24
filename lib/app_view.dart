@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable, empty_catches
+
 library app_view;
 
 import 'package:flutter/gestures.dart';
@@ -16,7 +18,8 @@ class AppViewController extends ChangeNotifier {
 class AppView extends StatelessWidget {
   final dynamic data;
   final void Function(dynamic value) callback;
-  const AppView(this.data, {Key? key, required this.callback}) : super(key: key);
+  const AppView(this.data, {Key? key, required this.callback})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +30,9 @@ class AppView extends StatelessWidget {
   Widget jsonToWidget(
     dynamic data,
   ) {
+    if (data is Widget) {
+      return data;
+    }
     var res = request(
       data,
     );
@@ -52,13 +58,18 @@ class AppView extends StatelessWidget {
     if (data is Map) {
       if (data["@type"] is String) {
         String type = data["@type"];
-        if (RegExp(r"^(EdgeInsets.all)$", caseSensitive: false).hasMatch(type)) {
+        if (RegExp(r"^(EdgeInsets.all)$", caseSensitive: false)
+            .hasMatch(type)) {
           return EdgeInsets.all(jsonToDouble(data["value"]) ?? 0.0);
         }
-        if (RegExp(r"^(EdgeInsets.symmetric)$", caseSensitive: false).hasMatch(type)) {
-          return EdgeInsets.symmetric(vertical: jsonToDouble(data["vertical"]) ?? 0.0, horizontal: jsonToDouble(data["horizontal"]) ?? 0.0);
+        if (RegExp(r"^(EdgeInsets.symmetric)$", caseSensitive: false)
+            .hasMatch(type)) {
+          return EdgeInsets.symmetric(
+              vertical: jsonToDouble(data["vertical"]) ?? 0.0,
+              horizontal: jsonToDouble(data["horizontal"]) ?? 0.0);
         }
-        if (RegExp(r"^(EdgeInsets.only)$", caseSensitive: false).hasMatch(type)) {
+        if (RegExp(r"^(EdgeInsets.only)$", caseSensitive: false)
+            .hasMatch(type)) {
           return EdgeInsets.only(
             top: jsonToDouble(data["top"]) ?? 0.0,
             left: jsonToDouble(data["left"]) ?? 0.0,
@@ -87,7 +98,10 @@ class AppView extends StatelessWidget {
   double? jsonToDouble(dynamic value) {
     if (value is String) {
       if (RegExp(r"[0-9]+", caseSensitive: false).hasMatch(value)) {
-        return int.parse(RegExp(r"[0-9]+", caseSensitive: false).stringMatch(value) ?? "0").toDouble();
+        return int.parse(
+                RegExp(r"[0-9]+", caseSensitive: false).stringMatch(value) ??
+                    "0")
+            .toDouble();
       }
     }
     if (value is num) {
@@ -99,7 +113,8 @@ class AppView extends StatelessWidget {
   int? jsonToInt(dynamic value) {
     if (value is String) {
       if (RegExp(r"[0-9]+", caseSensitive: false).hasMatch(value)) {
-        return int.parse(RegExp(r"[0-9]+", caseSensitive: false).stringMatch(value) ?? "0");
+        return int.parse(
+            RegExp(r"[0-9]+", caseSensitive: false).stringMatch(value) ?? "0");
       }
     }
     if (value is num) {
@@ -109,7 +124,8 @@ class AppView extends StatelessWidget {
   }
 
   /// json or native dart widget reqturn widget or null
-  dynamic request(dynamic data, {dynamic defaultData, dynamic expectData, bool allowResultNull = true}) {
+  dynamic request(dynamic data,
+      {dynamic defaultData, dynamic expectData, bool allowResultNull = true}) {
     if (data is Map) {
       if (data["@type"] is String) {
         String type = data["@type"];
@@ -129,12 +145,14 @@ class AppView extends StatelessWidget {
             navigatorKey: request(data["navigatorKey"]),
             scaffoldMessengerKey: request(data["scaffoldMessengerKey"]),
             home: request(data["home"]),
-            routes: request(data["routes"], defaultData: const <String, WidgetBuilder>{}),
+            routes: request(data["routes"],
+                defaultData: const <String, WidgetBuilder>{}),
             initialRoute: request(data["initialRoute"]),
             onGenerateRoute: request(data["onGenerateRoute"]),
             onGenerateInitialRoutes: request(data["onGenerateInitialRoutes"]),
             onUnknownRoute: request(data["onUnknownRoute"]),
-            navigatorObservers: request(data["navigatorObservers"], defaultData: const <NavigatorObserver>[]),
+            navigatorObservers: request(data["navigatorObservers"],
+                defaultData: const <NavigatorObserver>[]),
             builder: request(data["builder"]),
             title: request(data["title"], defaultData: ""),
             onGenerateTitle: request(data["onGenerateTitle"]),
@@ -143,23 +161,35 @@ class AppView extends StatelessWidget {
             darkTheme: request(data["darkTheme"]),
             highContrastTheme: request(data["highContrastTheme"]),
             highContrastDarkTheme: request(data["highContrastDarkTheme"]),
-            themeMode: request(data["themeMode"], defaultData: ThemeMode.system),
+            themeMode:
+                request(data["themeMode"], defaultData: ThemeMode.system),
             locale: request(data["locale"]),
             localizationsDelegates: request(data["localizationsDelegates"]),
-            localeListResolutionCallback: request(data["localeListResolutionCallback"]),
+            localeListResolutionCallback:
+                request(data["localeListResolutionCallback"]),
             localeResolutionCallback: request(data["localeResolutionCallback"]),
-            supportedLocales: request(data["supportedLocales"], defaultData: const <Locale>[Locale('en', 'US')]),
-            debugShowMaterialGrid: request(data["debugShowMaterialGrid"], defaultData: false),
-            showPerformanceOverlay: request(data["showPerformanceOverlay"], defaultData: false),
-            checkerboardRasterCacheImages: request(data["checkerboardRasterCacheImages"], defaultData: false),
-            checkerboardOffscreenLayers: request(data["checkerboardOffscreenLayers"], defaultData: false),
-            showSemanticsDebugger: request(data["showSemanticsDebugger"], defaultData: false),
-            debugShowCheckedModeBanner: request(data["debugShowCheckedModeBanner"], defaultData: true),
+            supportedLocales: request(data["supportedLocales"],
+                defaultData: const <Locale>[Locale('en', 'US')]),
+            debugShowMaterialGrid:
+                request(data["debugShowMaterialGrid"], defaultData: false),
+            showPerformanceOverlay:
+                request(data["showPerformanceOverlay"], defaultData: false),
+            checkerboardRasterCacheImages: request(
+                data["checkerboardRasterCacheImages"],
+                defaultData: false),
+            checkerboardOffscreenLayers: request(
+                data["checkerboardOffscreenLayers"],
+                defaultData: false),
+            showSemanticsDebugger:
+                request(data["showSemanticsDebugger"], defaultData: false),
+            debugShowCheckedModeBanner:
+                request(data["debugShowCheckedModeBanner"], defaultData: true),
             shortcuts: request(data["shortcuts"]),
             actions: request(data["actions"]),
             restorationScopeId: request(data["restorationScopeId"]),
             scrollBehavior: request(data["scrollBehavior"]),
-            useInheritedMediaQuery: request(data["useInheritedMediaQuery"], defaultData: false),
+            useInheritedMediaQuery:
+                request(data["useInheritedMediaQuery"], defaultData: false),
           );
         }
         if (isMatch("Scaffold", type)) {
@@ -168,8 +198,10 @@ class AppView extends StatelessWidget {
             appBar: request(data["appBar"]),
             body: request(data["body"]),
             floatingActionButton: request(data["floatingActionButton"]),
-            floatingActionButtonLocation: request(data["floatingActionButtonLocation"]),
-            floatingActionButtonAnimator: request(data["floatingActionButtonAnimator"]),
+            floatingActionButtonLocation:
+                request(data["floatingActionButtonLocation"]),
+            floatingActionButtonAnimator:
+                request(data["floatingActionButtonAnimator"]),
             persistentFooterButtons: request(data["persistentFooterButtons"]),
             drawer: request(data["drawer"]),
             onDrawerChanged: request(data["onDrawerChanged"]),
@@ -180,13 +212,18 @@ class AppView extends StatelessWidget {
             backgroundColor: request(data["backgroundColor"]),
             resizeToAvoidBottomInset: request(data["resizeToAvoidBottomInset"]),
             primary: request(data["primary"], defaultData: true),
-            drawerDragStartBehavior: request(data["drawerDragStartBehavior"], defaultData: DragStartBehavior.start),
+            drawerDragStartBehavior: request(data["drawerDragStartBehavior"],
+                defaultData: DragStartBehavior.start),
             extendBody: request(data["extendBody"], defaultData: false),
-            extendBodyBehindAppBar: request(data["extendBodyBehindAppBar"], defaultData: false),
+            extendBodyBehindAppBar:
+                request(data["extendBodyBehindAppBar"], defaultData: false),
             drawerScrimColor: request(data["drawerScrimColor"]),
             drawerEdgeDragWidth: request(data["drawerEdgeDragWidth"]),
-            drawerEnableOpenDragGesture: request(data["drawerEnableOpenDragGesture"], defaultData: true),
-            endDrawerEnableOpenDragGesture: request(data["endDrawerEnableOpenDragGesture"], defaultData: true),
+            drawerEnableOpenDragGesture:
+                request(data["drawerEnableOpenDragGesture"], defaultData: true),
+            endDrawerEnableOpenDragGesture: request(
+                data["endDrawerEnableOpenDragGesture"],
+                defaultData: true),
             restorationId: request(data["restorationId"]),
           );
         }
@@ -256,7 +293,8 @@ class AppView extends StatelessWidget {
         }
         if (isMatch("Padding", type)) {
           return Padding(
-            padding: jsonToEdgeInsetsGeometry(data["padding"]) ?? const EdgeInsets.all(0),
+            padding: jsonToEdgeInsetsGeometry(data["padding"]) ??
+                const EdgeInsets.all(0),
             child: request(data["child"]),
           );
         }
@@ -272,7 +310,7 @@ class AppView extends StatelessWidget {
             shadows: request(data["shadows"]),
           );
         }
-        
+
         if (isMatch("Expanded", type)) {
           return Expanded(
             key: request(data["key"]),
@@ -323,22 +361,30 @@ class AppView extends StatelessWidget {
           if (isMatch("Row", type)) {
             return Row(
               key: request(data["key"]),
-              mainAxisAlignment: request(data["mainAxisAlignment"], defaultData: MainAxisAlignment.start),
-              mainAxisSize: request(data["mainAxisSize"], defaultData: MainAxisSize.max),
-              crossAxisAlignment: request(data["crossAxisAlignment"], defaultData: CrossAxisAlignment.center),
+              mainAxisAlignment: request(data["mainAxisAlignment"],
+                  defaultData: MainAxisAlignment.start),
+              mainAxisSize:
+                  request(data["mainAxisSize"], defaultData: MainAxisSize.max),
+              crossAxisAlignment: request(data["crossAxisAlignment"],
+                  defaultData: CrossAxisAlignment.center),
               textDirection: request(data["textDirection"]),
-              verticalDirection: request(data["verticalDirection"], defaultData: VerticalDirection.down),
+              verticalDirection: request(data["verticalDirection"],
+                  defaultData: VerticalDirection.down),
               textBaseline: request(data["textBaseline"]),
               children: children,
             );
           }
           return Column(
             key: request(data["key"]),
-            mainAxisAlignment: request(data["mainAxisAlignment"], defaultData: MainAxisAlignment.start),
-            mainAxisSize: request(data["mainAxisSize"], defaultData: MainAxisSize.max),
-            crossAxisAlignment: request(data["crossAxisAlignment"], defaultData: CrossAxisAlignment.center),
+            mainAxisAlignment: request(data["mainAxisAlignment"],
+                defaultData: MainAxisAlignment.start),
+            mainAxisSize:
+                request(data["mainAxisSize"], defaultData: MainAxisSize.max),
+            crossAxisAlignment: request(data["crossAxisAlignment"],
+                defaultData: CrossAxisAlignment.center),
             textDirection: request(data["textDirection"]),
-            verticalDirection: request(data["verticalDirection"], defaultData: VerticalDirection.down),
+            verticalDirection: request(data["verticalDirection"],
+                defaultData: VerticalDirection.down),
             textBaseline: request(data["textBaseline"]),
             children: children,
           );

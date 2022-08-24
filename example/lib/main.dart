@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return AppView({
       "@type": "MaterialApp",
-      "debugShowCheckedModeBanner": true,
+      "debugShowCheckedModeBanner": false,
       "home": {
         "@type": "Scaffold",
         "body": {
@@ -102,6 +102,11 @@ class _MyHomePageState extends State<MyHomePage> {
           "onPressed": {
             "@type": "SendCallbackData",
             "data": const {"helo": "as"},
+            "action": () {
+              setState(() {
+                _counter++;
+              });
+            }
           },
           "tooltip": 'Increment',
           "child": const Icon(Icons.abc),
