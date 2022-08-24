@@ -114,7 +114,10 @@ class AppView extends StatelessWidget {
       if (data["@type"] is String) {
         String type = data["@type"];
         if (isMatch("SendCallbackData", type)) {
-          return () {
+          return () async {
+            if (data["action"] is Function) {
+              (data["action"] as Function).call();
+            }
             callback(data["data"]);
           };
         }
@@ -269,6 +272,24 @@ class AppView extends StatelessWidget {
             shadows: request(data["shadows"]),
           );
         }
+        
+        if (isMatch("Expanded", type)) {
+          return Expanded(
+            key: request(data["key"]),
+            flex: request(data["flex"], defaultData: 1),
+            child: request(data["child"]),
+          );
+        }
+
+        if (isMatch("Flexible", type)) {
+          return Flexible(
+            key: request(data["key"]),
+            flex: request(data["flex"], defaultData: 1),
+            fit: request(data["fit"], defaultData: FlexFit.loose),
+            child: request(data["child"]),
+          );
+        }
+
         if (isMatch("Text", type)) {
           return Text(
             "${data["data"]}",

@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:app_view/app_view.dart';
 
@@ -17,21 +17,14 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    task();
   }
 
   task() {
-    Timer.periodic(Duration(milliseconds: 1), (t) {
+    Timer.periodic(const Duration(milliseconds: 1), (t) {
       setState(() {
         _counter++;
       });
@@ -92,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   "children": List.generate(5, (index) {
                     return {
                       "@type": "Padding",
-                      "padding": EdgeInsets.all(10),
+                      "padding": const EdgeInsets.all(10),
                       "child": {
                         "@type": "Text",
                         "data": "Row Text $index",
@@ -104,15 +97,20 @@ class _MyHomePageState extends State<MyHomePage> {
             },
           ]
         },
-        "floatingActionButton": const {
+        "floatingActionButton": {
           "@type": "floatingActionButton",
-          "onPressed":  {"@type": "SendCallbackData", "data": "ini tayo"},
+          "onPressed": {
+            "@type": "SendCallbackData",
+            "data": const {"helo": "as"},
+          },
           "tooltip": 'Increment',
-          "child": Icon(Icons.abc),
+          "child": const Icon(Icons.abc),
         }
       }
     }, callback: (value) {
-      print(value);
+      if (kDebugMode) {
+        print(value);
+      }
     });
   }
 }
