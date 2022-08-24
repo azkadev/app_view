@@ -22,6 +22,17 @@ Widget jsonToWidget(Map? data) {
   if (data["@type"] is String) {
     String type = data["@type"];
     if (RegExp(r"^(helloWorld)$", caseSensitive: false).hasMatch(type)) {}
+
+    if (RegExp(r"^(MaterialApp)$", caseSensitive: false).hasMatch(type)) {
+      return MaterialApp(
+        home: jsonToWidget(data["home"]),
+      );
+    }
+    if (RegExp(r"^(Scaffold)$", caseSensitive: false).hasMatch(type)) {
+      return Scaffold(
+        body: jsonToWidget(data["body"]),
+      );
+    }
     if (RegExp(r"^(Container)$", caseSensitive: false).hasMatch(type)) {
       return Container(
         child: jsonToWidget(data["child"]),
@@ -105,13 +116,11 @@ EdgeInsetsGeometry jsonToEdgeInsetsGeometry(Map? data) {
     if (RegExp(r"^(EdgeInsets.all)$", caseSensitive: false).hasMatch(type)) {
       return EdgeInsets.all(value);
     }
-    if (RegExp(r"^(EdgeInsets.symmetric)$", caseSensitive: false)
-        .hasMatch(type)) {
+    if (RegExp(r"^(EdgeInsets.symmetric)$", caseSensitive: false).hasMatch(type)) {
       return EdgeInsets.symmetric(vertical: vertical, horizontal: horizontal);
     }
     if (RegExp(r"^(EdgeInsets.only)$", caseSensitive: false).hasMatch(type)) {
-      return EdgeInsets.only(
-          top: top, left: left, right: right, bottom: bottom);
+      return EdgeInsets.only(top: top, left: left, right: right, bottom: bottom);
     }
   }
   return const EdgeInsets.all(0);
