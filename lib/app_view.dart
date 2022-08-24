@@ -17,9 +17,23 @@ class JsonToWidget extends StatelessWidget {
   }
 }
 
+class AppView extends ChangeNotifier {
+  List<Widget> items = [];
+
+  void clearItems() {
+    items.clear();
+    notifyListeners();
+  }
+}
+
 /// json to widget function
-Widget jsonToWidget(dynamic data) {
-  var res = request(data);
+Widget jsonToWidget(
+  dynamic data,
+) {
+  AppView appview = AppView();
+  var res = request(
+    data,
+  );
   if (res is Widget) {
     return res;
   }
@@ -39,6 +53,12 @@ dynamic request(dynamic data, {dynamic defaultData, dynamic expectData, bool all
   if (data is Map) {
     if (data["@type"] is String) {
       String type = data["@type"];
+      if (isMatch("SendCallbackData", type)) {
+        return () {
+          print("object");
+        };
+      }
+
       // completed
       if (isMatch("MaterialApp", type)) {
         return MaterialApp(
@@ -148,7 +168,10 @@ dynamic request(dynamic data, {dynamic defaultData, dynamic expectData, bool all
           hoverElevation: request(data["hoverElevation"]),
           highlightElevation: request(data["highlightElevation"]),
           disabledElevation: request(data["disabledElevation"]),
-          onPressed: request(data["onPressed"], defaultData: () {}),
+          onPressed: request(
+            data["onPressed"],
+            defaultData: () {},
+          ),
           mouseCursor: request(data["mouseCursor"]),
           mini: request(data["mini"], defaultData: false),
           shape: request(data["shape"]),

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:app_view/app_view.dart';
@@ -26,7 +27,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    task();
   }
 
   task() {
@@ -39,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    SingleChildScrollView();
     return jsonToWidget({
       "@type": "MaterialApp",
       "debugShowCheckedModeBanner": true,
@@ -105,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         "floatingActionButton": {
           "@type": "floatingActionButton",
-          "onPressed": _incrementCounter,
+          "onPressed": {"@type": "SendCallbackData", "data": "ini tayo"},
           "tooltip": 'Increment',
           "child": Icon(Icons.abc),
         }
