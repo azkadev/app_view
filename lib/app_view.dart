@@ -1,4 +1,4 @@
-library jsonview;
+library app_view;
 
 import 'package:flutter/material.dart';
 

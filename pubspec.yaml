@@ -1,9 +1,9 @@
-name: jsonview
+name: app_view
 description: library for make app and widget based data json
-version: 0.0.0
-homepage: https://github.com/azkadev/jsonview/wiki
-repository: https://github.com/azkadev/jsonview/tree/main/dart/jsonview
-issue_tracker: https://github.com/azkadev/jsonview/issues
+version: 0.0.1
+homepage: https://github.com/azkadev/app_view/wiki
+repository: https://github.com/azkadev/app_view/tree/main/dart/app_view
+issue_tracker: https://github.com/azkadev/app_view/issues
 
 
 environment:
