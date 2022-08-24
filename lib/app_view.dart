@@ -39,6 +39,7 @@ dynamic request(dynamic data, {dynamic defaultData, dynamic expectData, bool all
   if (data is Map) {
     if (data["@type"] is String) {
       String type = data["@type"];
+      // completed
       if (isMatch("MaterialApp", type)) {
         return MaterialApp(
           key: request(data["key"]),
@@ -174,6 +175,17 @@ dynamic request(dynamic data, {dynamic defaultData, dynamic expectData, bool all
         );
       }
 
+      if (isMatch("Icon", type)) {
+        return Icon(
+          request(data["data"]),
+          key: request(data["key"]),
+          size: request(data["size"]),
+          color: request(data["color"]),
+          semanticLabel: request(data["semanticLabel"]),
+          textDirection: request(data["textDirection"]),
+          shadows: request(data["shadows"]),
+        );
+      }
       if (isMatch("Text", type)) {
         return Text(
           "${data["data"]}",
