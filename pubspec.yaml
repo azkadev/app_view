@@ -1,6 +1,6 @@
 name: app_view
 description: Library untuk membuat widget / app dari data json untuk semua platform + Support mix with native dart ( Flutter Widget ).
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/azkadev/app_view/wiki
 repository: https://github.com/azkadev/app_view/
 issue_tracker: https://github.com/azkadev/app_view/issues

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:app_view/app_view.dart';
 
@@ -21,6 +23,21 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    task();
+  }
+
+  task() {
+    Timer.periodic(Duration(milliseconds: 1), (t) {
+      setState(() {
+        _counter++;
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return jsonToWidget({
       "@type": "MaterialApp",
@@ -34,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
               "@type": "Padding",
               "padding": {
                 "@type": "EdgeInsets.all",
-                "value": _counter,
+                "value": 10,
               },
               "child": {
                 "@type": "Center",
