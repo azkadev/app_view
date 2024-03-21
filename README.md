@@ -1,6 +1,10 @@
-# jsonview
+IyBqc29udmlldwoKTGlicmFyeSB1bnR1ayBtZW1idWF0IHdpZGdldCAvIGFw
+cCBkYXJpIGRhdGEganNvbiB1bnR1ayBzZW11YSBwbGF0Zm9ybSArIFN1cHBv
+cnQgbWl4IHdpdGggbmF0aXZlIGRhcnQgKCBGbHV0dGVyIFdpZGdldCApCgoj
+IyBTY3JlZW5zaG90CiFbXShodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVu
+dC5jb20vYXprYWRldi9qc29udmlldy9tYWluL3NjcmVlbnNob3Qvc2NyZWVu
+c2hvdC5wbmcp
 
-Library untuk membuat widget / app dari data json untuk semua platform + Support mix with native dart ( Flutter Widget )
-
-## Screenshot
-![](https://raw.githubusercontent.com/azkadev/jsonview/main/screenshot/screenshot.png)
+<!-- START GLOBAL CORPORATION -->
+404: Not Found
+<!-- END GLOBAL CORPORATION -->
